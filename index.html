@@ -38,6 +38,101 @@ body, html{
     /* padding-top: 50px; */
 }
 
+.date-picker-section{
+    display: none;
+    width: 400px;
+    height: auto;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    text-align: center;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 2px solid rgba(147, 77, 77, 0.3);
+}
+
+.date-picker-section h1{
+    font-size: 40px;
+    font-weight: 700;
+    text-shadow: 0px 3px 6px rgb(147, 77, 77);
+    margin-bottom: 20px;
+}
+
+.date-input{
+    width: 100%;
+    padding: 15px;
+    font-size: 18px;
+    border: 2px solid rgba(147, 77, 77, 0.5);
+    border-radius: 10px;
+    margin-bottom: 20px;
+    font-family: 'Bellota Text', sans-serif;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.activity-section{
+    display: none;
+    width: 450px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    text-align: center;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 2px solid rgba(147, 77, 77, 0.3);
+}
+
+.activity-section h1{
+    font-size: 35px;
+    font-weight: 700;
+    text-shadow: 0px 3px 6px rgb(147, 77, 77);
+    margin-bottom: 25px;
+}
+
+.activity-list{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.activity-option{
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.5);
+    border: 2px solid rgba(147, 77, 77, 0.3);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 20px;
+    font-weight: 550;
+}
+
+.activity-option:hover{
+    background: rgba(255, 255, 255, 0.7);
+    box-shadow: 0px 4px 8px rgba(147, 77, 77, 0.3);
+}
+
+.activity-option input[type="radio"]{
+    margin-right: 15px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.activity-option span{
+    flex: 1;
+    text-align: left;
+}
+
 .confirmation h1{
     font-style: bolder;
     font-size: 50px;
@@ -205,6 +300,29 @@ body, html{
         transform: translate(-50%,-50%);
         text-align: center;
     }
+
+    .date-picker-section{
+        width: 90%;
+        padding: 20px;
+    }
+
+    .date-picker-section h1{
+        font-size: 30px;
+    }
+
+    .activity-section{
+        width: 90%;
+        padding: 20px;
+    }
+
+    .activity-section h1{
+        font-size: 28px;
+    }
+
+    .activity-option{
+        font-size: 18px;
+        padding: 12px;
+    }
 }
 
 header {
@@ -264,43 +382,127 @@ header h2 {
                 <div class="fix-gif">
                     <div class="fix-gifimg"></div>
                 </div>
-                <!-- <a href="https://wa.me/+918595790116?text='Chalo date pr chalein!!!!!' ">
-                </a> -->
-                    <button class="answer" id="fix">Let's Fix a date</button>
-                
+                    <button class="answer" id="fix">Let's Plan a date</button>
             </div>
+    </div>
+
+    <div class="date-picker-section">
+        <h1>Pick a Date! 📅</h1>
+        <input type="date" id="dateSelector" class="date-input">
+        <button class="answer" id="continueBtn">Continue</button>
+    </div>
+
+    <div class="activity-section">
+        <h1>What should we do together? 💕</h1>
+        <div class="activity-list">
+            <label class="activity-option">
+                <input type="radio" name="activity" value="Food and yap">
+                <span>Food and yap 🍽️</span>
+            </label>
+            <label class="activity-option">
+                <input type="radio" name="activity" value="Movie date">
+                <span>Movie date 🎬</span>
+            </label>
+            <label class="activity-option">
+                <input type="radio" name="activity" value="Virtual movie date">
+                <span>Virtual movie date 💻</span>
+            </label>
+            <label class="activity-option">
+                <input type="radio" name="activity" value="Cafe Hopping">
+                <span>Cafe Hopping ☕</span>
+            </label>
+            <label class="activity-option">
+                <input type="radio" name="activity" value="Bike rides">
+                <span>Bike rides 🏍️</span>
+            </label>
+            <label class="activity-option">
+                <input type="radio" name="activity" value="Shopping date">
+                <span>Shopping date 🛍️</span>
+            </label>
+            <label class="activity-option">
+                <input type="radio" name="activity" value="Gangar ghat e prem">
+                <span>Gangar ghat e prem 🌊</span>
+            </label>
+        </div>
+        <button class="answer" id="sendWhatsApp">Send to WhatsApp 💬</button>
     </div>
 
     </div>
 
     <script>
         const yes = document.querySelector("#yes");
-const no = document.querySelector("#no");
-const confirmation = document.querySelector(".confirmation");
-const container = document.querySelector(".container");
+        const no = document.querySelector("#no");
+        const confirmation = document.querySelector(".confirmation");
+        const container = document.querySelector(".container");
+        const datePickerSection = document.querySelector(".date-picker-section");
+        const activitySection = document.querySelector(".activity-section");
+        const dateSelector = document.querySelector("#dateSelector");
+        const continueBtn = document.querySelector("#continueBtn");
+        const sendWhatsAppBtn = document.querySelector("#sendWhatsApp");
 
-yesAnswerMethod = () => {
-    container.style.display = 'none'
-    confirmation.style.display = 'block'
-}
+        let selectedDate = "";
+        let selectedActivity = "";
 
-noAnswerMethod = () => {
-    no.style.position = 'absolute'
+        yesAnswerMethod = () => {
+            container.style.display = 'none'
+            confirmation.style.display = 'block'
+        }
 
-    xPosition = Math.floor(Math.random() * container.clientWidth)
-    yPosition = Math.floor(Math.random() * container.clientHeight)
+        noAnswerMethod = () => {
+            no.style.position = 'absolute'
 
-    no.style.top = `${yPosition}px`
-    no.style.left = `${xPosition}px`
+            xPosition = Math.floor(Math.random() * container.clientWidth)
+            yPosition = Math.floor(Math.random() * container.clientHeight)
 
-}
+            no.style.top = `${yPosition}px`
+            no.style.left = `${xPosition}px`
+        }
 
-no.addEventListener('click', noAnswerMethod)
-yes.addEventListener('click', yesAnswerMethod)
+        no.addEventListener('click', noAnswerMethod)
+        yes.addEventListener('click', yesAnswerMethod)
 
-document.getElementById("fix").addEventListener("click", function(){
-    window.location= "https://wa.me/+916295473099?text=Lets go on a date, I miss you !!!!! ";
-}, false);
+        // Show date picker when "Let's Plan a date" is clicked
+        document.getElementById("fix").addEventListener("click", function(){
+            confirmation.style.display = 'none'
+            datePickerSection.style.display = 'block'
+        });
+
+        // Continue to activity selection
+        continueBtn.addEventListener("click", function(){
+            selectedDate = dateSelector.value;
+            if(!selectedDate){
+                alert("Please select a date first! 📅");
+                return;
+            }
+            datePickerSection.style.display = 'none'
+            activitySection.style.display = 'block'
+        });
+
+        // Send WhatsApp message with date and activity
+        sendWhatsAppBtn.addEventListener("click", function(){
+            const activityRadio = document.querySelector('input[name="activity"]:checked');
+            
+            if(!activityRadio){
+                alert("Please select an activity! 💕");
+                return;
+            }
+            
+            selectedActivity = activityRadio.value;
+            
+            // Format the date to be more readable
+            const dateObj = new Date(selectedDate);
+            const formattedDate = dateObj.toLocaleDateString('en-US', { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+            
+            const message = `Lets go on a date, I miss you !!!!!\n\nWe can go on ${formattedDate} and we can do ${selectedActivity}.`;
+            const encodedMessage = encodeURIComponent(message);
+            
+            window.location = `https://wa.me/+916295473099?text=${encodedMessage}`;
+        });
     </script>
     
 </body>
